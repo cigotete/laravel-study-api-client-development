@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('access_tokens', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id'); // User ID in this app
             $table->foreign('user_id')
             ->references('id')
             ->on('users');
-            $table->unsignedBigInteger('service_uid');
+            $table->unsignedBigInteger('service_uid'); // User ID in the remote api
             $table->text('access_token');
             $table->text('refresh_token');
             $table->dateTime('expires_at');
