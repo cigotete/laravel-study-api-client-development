@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post('http://laravel-study-api-development-cdrsfr.test/api/v1/login?XDEBUG_SESSION_START=vscode', [
+        ])->post(config('services.api-restful.url') . '/api/v1/login?XDEBUG_SESSION_START=vscode', [
             'email' => $request->email,
             'password' => $request->password
         ]);

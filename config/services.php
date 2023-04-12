@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'api-restful' => [
+        'url' => env('API_RESTFUL_URL'),
+        'client_id' => env('API_RESTFUL_CLIENT_ID'),
+        'client_secret' => env('API_RESTFUL_CLIENT_SECRET'),
+    ],
+
 ];

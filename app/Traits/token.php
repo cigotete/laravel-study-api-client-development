@@ -10,10 +10,10 @@ trait Token {
 
         $response = Http::withHeaders([
             'Accept' => 'application/json'
-        ])->post('http://laravel-study-api-development-cdrsfr.test/oauth/token', [
+        ])->post( config('services.api-restful.url') . '/oauth/token', [
             'grant_type' => 'password',
-            'client_id' => '98a68cfa-b51e-4248-93e4-de535adc7351',
-            'client_secret' => 'YC26XHrGrO6n2RowihE6P0ehXXc5OVLnocZXIRIi',
+            'client_id' => config('services.api-restful.client_id'),
+            'client_secret' => config('services.api-restful.client_secret'),
             'username' => request('email'),
             'password' => request('password'),
         ]);
