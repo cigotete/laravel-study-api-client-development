@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Http;
+use App\Traits\Token;
 class RegisteredUserController extends Controller
 {
+    use Token;
     /**
      * Display the registration view.
      */
@@ -36,11 +39,22 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+        ])->post('http://laravel-study-api-development-cdrsfr.test/api/v1/register?XDEBUG_SESSION_START=vscode', $request->all());
+
+        if ($response->status() == 422) {
+            return back()->withErrors($response->json()['errors']);
+        }
+
+        $service = $response->json();
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
         ]);
+
+        $this->setAccessToken($user, $service);
 
         event(new Registered($user));
 
