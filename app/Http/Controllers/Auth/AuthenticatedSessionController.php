@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post(config('services.api-restful.url') . '/api/v1/login?XDEBUG_SESSION_START=vscode', [
+        ])->post(config('services.api-restful.url') . '/api/v1/login', [
             'email' => $request->email,
             'password' => $request->password
         ]);

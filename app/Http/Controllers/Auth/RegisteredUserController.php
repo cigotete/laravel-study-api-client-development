@@ -41,7 +41,7 @@ class RegisteredUserController extends Controller
 
         $response = Http::withHeaders([
             'Accept' => 'application/json',
-        ])->post(config('services.api-restful.url') . '/api/v1/register?XDEBUG_SESSION_START=vscode', $request->all());
+        ])->post(config('services.api-restful.url') . '/api/v1/register', $request->all());
 
         if ($response->status() == 422) {
             return back()->withErrors($response->json()['errors']);
