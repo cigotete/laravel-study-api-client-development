@@ -9,6 +9,8 @@ class PostController extends Controller
 {
     public function index(Request $request) {
 
+        $this->resolveAuthorization(); // Refresh token if expired
+
         $response = Http::withHeaders([
             'Accept' => 'application/json',
             'Authorization' => 'Bearer ' . auth()->user()->accessToken->access_token
@@ -25,6 +27,8 @@ class PostController extends Controller
     }
 
     public function store() {
+
+        $this->resolveAuthorization(); // Refresh token if expired
 
         $response = Http::withHeaders([
             'Accept'    => 'application/json',
